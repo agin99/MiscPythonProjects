@@ -1,5 +1,5 @@
 import fractions
-# from MatMul.py import mat_mul
+from MatMul import mat_mul
 
 def lu_decomp(matrix):
     remaining_indices = []
@@ -55,6 +55,16 @@ def det(matrix):
         det *= triangle_matrix[i][i]
     return det
 
+def permute_system(p_mat, b_vec):
+
+    pass 
+
+def forward_sub(l_mat, b_vec): 
+    pass
+
+def back_sub(u_mat, y_vec): 
+    pass
+
 #use cramers rule xi = (det A_{i})/det(A)
 def inverse():
     pass
@@ -76,6 +86,14 @@ def main():
     for row in upper_triangular_matrix:
         print(row)
     print("\n")
+
+    v1 = [
+        [1], 
+        [0], 
+        [1]
+    ]
+
+    print(mat_mul(permutation_matrix, v1))
     
     m2 = [
         [fractions.Fraction(1, 1), fractions.Fraction(1, 1)],
