@@ -56,7 +56,6 @@ def det(matrix):
     return det
 
 def permute_system(p_mat, b_vec):
-
     pass 
 
 def forward_sub(l_mat, b_vec): 
@@ -85,15 +84,18 @@ def main():
     print("Upper triangular Matrix:")
     for row in upper_triangular_matrix:
         print(row)
-    print("\n")
+
+    print("")
+    for row in permutation_matrix:
+        print(row)
 
     v1 = [
         [1], 
         [0], 
         [1]
     ]
-
-    print(mat_mul(permutation_matrix, v1))
+    print(f"adj_vec: {mat_mul(permutation_matrix, v1)}")
+    print("")
     
     m2 = [
         [fractions.Fraction(1, 1), fractions.Fraction(1, 1)],
@@ -109,5 +111,11 @@ def main():
     print("Upper triangular Matrix:")
     for row in upper_triangular_matrix:
         print(row)
+    v2 = [
+        [1], 
+        [0]
+    ]
+    print(f"adj_vec: {mat_mul(permutation_matrix, v2)}")
+    print("")
 
 main()
