@@ -53,20 +53,21 @@ def det(matrix):
     det = 1
     for i in range(len(triangle_matrix)):
         det *= triangle_matrix[i][i]
-    return det
+    return det 
 
-def permute_system(p_mat, b_vec):
-    pass 
-
-def forward_sub(l_mat, b_vec): 
-    pass
-
-def back_sub(u_mat, y_vec): 
-    pass
-
-#use cramers rule xi = (det A_{i})/det(A)
-def inverse():
-    pass
+def solver(p_mat, l_mat, u_mat, b_vec): 
+    pb_vec = mat_mul(p_mat, b_vec)
+    ly_vec = []
+    ux_vec = []
+    #Solve Ly = b for y
+    for row_index, row in enumerate(l_mat):
+        ly_term = pb_vec[row_index][0] - sum([i[0]*j for i, j in zip(ly_vec, row[0:row_index])])
+        ly_vec.append([ly_term])
+    #Solve Ux = y for x
+    for row_index, row in enumerate(u_mat):
+        ux_term = ly_vec[len(u_mat) - row_index - 1][0] - sum([i*j for i, j in zip(ux_vec, row[len(u_mat) - row_index - 1:])])
+        ux_vec.insert(0, ux_term)
+    return ux_vec
 
 def main():
     m1 = [
@@ -75,47 +76,68 @@ def main():
         [fractions.Fraction(2, 1), fractions.Fraction(1, 1), fractions.Fraction(1, 1)]
     ]
     permutation_matrix, lower_triangular_matrix, upper_triangular_matrix = lu_decomp(m1)
+    print("")
     print("Permutation matrix:")
     for row in permutation_matrix:
         print(row)
+    print("")
     print("Lower triangular Matrix:")
     for row in lower_triangular_matrix:
         print(row)
+    print("")
     print("Upper triangular Matrix:")
     for row in upper_triangular_matrix:
         print(row)
-
     print("")
-    for row in permutation_matrix:
-        print(row)
 
-    v1 = [
-        [1], 
-        [0], 
-        [1]
-    ]
-    print(f"adj_vec: {mat_mul(permutation_matrix, v1)}")
-    print("")
+    # print("")
+    # for row in permutation_matrix:
+    #     print(row)
+
+    # v1 = [
+    #     [1], 
+    #     [0], 
+    #     [1]
+    # ]
+    # print(f"adj_vec: {mat_mul(permutation_matrix, v1)}")
+    # print("")
     
-    m2 = [
-        [fractions.Fraction(1, 1), fractions.Fraction(1, 1)],
-        [fractions.Fraction(2, 1), fractions.Fraction(5, 1)]
+    # m2 = [
+    #     [fractions.Fraction(1, 1), fractions.Fraction(1, 1)],
+    #     [fractions.Fraction(2, 1), fractions.Fraction(5, 1)]
+    # ]
+    # permutation_matrix, lower_triangular_matrix, upper_triangular_matrix = lu_decomp(m2)
+    # print("Permutation matrix:")
+    # for row in permutation_matrix:
+    #     print(row)
+    # print("Lower triangular Matrix:")
+    # for row in lower_triangular_matrix:
+    #     print(row)
+    # print("Upper triangular Matrix:")
+    # for row in upper_triangular_matrix:
+    #     print(row)
+    # v2 = [
+    #     [1], 
+    #     [0]
+    # ]
+    # print(f"adj_vec: {mat_mul(permutation_matrix, v2)}")
+    # print("")
+    b_vec = [
+        [1],
+        [5],
+        [3]
     ]
-    permutation_matrix, lower_triangular_matrix, upper_triangular_matrix = lu_decomp(m2)
-    print("Permutation matrix:")
-    for row in permutation_matrix:
+
+    print("b:")
+    for row in b_vec:
         print(row)
-    print("Lower triangular Matrix:")
-    for row in lower_triangular_matrix:
-        print(row)
-    print("Upper triangular Matrix:")
-    for row in upper_triangular_matrix:
-        print(row)
-    v2 = [
-        [1], 
-        [0]
-    ]
-    print(f"adj_vec: {mat_mul(permutation_matrix, v2)}")
-    print("")
+
+    solution_vec = solver(
+        permutation_matrix, 
+        lower_triangular_matrix, 
+        upper_triangular_matrix, 
+        b_vec
+    )
+    print(solution_vec)
 
 main()
