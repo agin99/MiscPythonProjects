@@ -51,8 +51,8 @@ def lu_decomp(matrix):
 
 def det(matrix):
     det = 1
-    for i in range(len(triangle_matrix)):
-        det *= triangle_matrix[i][i]
+    for i in range(len(matrix)):
+        det *= matrix[i][i]
     return det 
 
 def solver(p_mat, l_mat, u_mat, b_vec): 
