@@ -1,4 +1,3 @@
-#Perform matrix multiplication using list comprehension
 def mat_mul(m1, m2):
     res_mat = []
     for index in range(len(m1)):

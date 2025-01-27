@@ -68,3 +68,26 @@ def solver(p_mat, l_mat, u_mat, b_vec):
         ux_term = ly_vec[len(u_mat) - row_index - 1][0] - sum([i*j for i, j in zip(ux_vec, row[len(u_mat) - row_index - 1:])])
         ux_vec.insert(0, ux_term)
     return ux_vec
+
+def main():
+    m1 = [
+        [fractions.Fraction(0, 1), fractions.Fraction(1, 1), fractions.Fraction(1, 1), fractions.Fraction(1, 1)], 
+        [fractions.Fraction(1, 1), fractions.Fraction(0, 1), fractions.Fraction(1, 1), fractions.Fraction(5, 1)],
+        [fractions.Fraction(2, 1), fractions.Fraction(1, 1), fractions.Fraction(1, 1), fractions.Fraction(0, 1)]
+    ]
+    permutation_matrix, lower_triangular_matrix, upper_triangular_matrix = lu_decomp(m1)
+    print("")
+    print("Permutation matrix:")
+    for row in permutation_matrix:
+        print(row)
+    print("")
+    print("Lower triangular Matrix:")
+    for row in lower_triangular_matrix:
+        print(row)
+    print("")
+    print("Upper triangular Matrix:")
+    for row in upper_triangular_matrix:
+        print(row)
+    print("")
+
+main()
