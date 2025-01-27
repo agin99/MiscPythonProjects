@@ -9,10 +9,10 @@ def vec_add(v1, v2):
     return [[i[0] + j[0]] for i, j in zip(v1, v2)]
 
 def vec_mul(c, v1):
-    print(f"vec_mul::c: {c}")
-    print(f"vec_mul::v1: {v1}")
-    for i in v1:
-        print(f"vec_mul::c*v1: {c*i[0]}")
+    # print(f"vec_mul::c: {c}")
+    # print(f"vec_mul::v1: {v1}")
+    # for i in v1:
+    #     print(f"vec_mul::c*v1: {c*i[0]}")
     return [[c * i[0]] for i in v1]
 
 def normalize(v1):
